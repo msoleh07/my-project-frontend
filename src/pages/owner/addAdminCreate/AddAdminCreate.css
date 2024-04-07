@@ -1,0 +1,150 @@
+.admin_register_page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin_register_header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}
+
+.admin_register_header h1 {
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 5px #d6def7, -3px -3px 5px #e7ebf7;
+  text-align: center;
+  color: #333;
+}
+
+.admin_create_header_btn {
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 5px #d6def7, -3px -3px 5px #e7ebf7;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.admin_create_header_btn button {
+  padding: 13px 30px;
+  border-radius: 10px;
+  border: none;
+  font-size: 17px;
+  cursor: pointer;
+  box-shadow: 3px 3px 5px #d6def7, -3px -3px 5px #e7ebf7;
+  background: none;
+  color: #333;
+}
+
+.admin_create_header_btn button.active {
+  box-shadow: none;
+  background: #d6f7ed;
+}
+
+.admin_register_form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+  gap: 20px;
+  padding: 20px;
+  box-shadow: 3px 3px 5px #d6def7, -3px -3px 5px #e7ebf7;
+  border-radius: 10px;
+}
+
+.admin_register_form_inputs {
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+  gap: 5px;
+}
+
+.admin_register_form_inputs label {
+  font-size: 12px;
+  color: #333;
+  margin-left: 2px;
+}
+
+.admin_register_form_inputs input {
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  height: 45px;
+  box-shadow: 3px 3px 5px #d6def7, -3px -3px 5px #e7ebf7;
+  text-indent: 10px;
+  font-size: 17px;
+}
+
+.admin_register_input_password {
+  border-radius: 10px;
+  height: 45px;
+  box-shadow: 3px 3px 5px #d6def7, -3px -3px 5px #e7ebf7;
+  display: flex;
+  align-items: center;
+}
+
+.admin_register_input_password input {
+  box-shadow: none;
+  flex: 1;
+}
+
+.admin_register_input_password span {
+  height: 100%;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.admin_register_form_btn {
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin_register_form_btn button {
+  padding: 13px 100px;
+  border-radius: 10px;
+  border: none;
+  font-size: 17px;
+  cursor: pointer;
+  box-shadow: 3px 3px 5px #d6def7, -3px -3px 5px #e7ebf7;
+  background: none;
+  color: #333;
+}
+
+@media (max-width: 545px) {
+  .admin_create_header_btn {
+    flex-direction: column;
+  }
+
+  .admin_create_header_btn button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .admin_register_form_btn {
+    padding: 0;
+  }
+
+  .admin_register_form_btn button {
+    padding: 13px 10px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 355px) {
+  .admin_register_header h1 {
+    font-size: 22px;
+  }
+}
