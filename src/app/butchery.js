@@ -2,6 +2,10 @@ import { api } from "./api";
 
 export const butcheryApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    getButcheryAllData: builder.query({
+      query: () => "/api/butcheryUser",
+      providesTags: ["BUTCHERY", "GETWORKER"],
+    }),
     addMeatData: builder.mutation({
       query(body) {
         return {
@@ -15,4 +19,5 @@ export const butcheryApi = api.injectEndpoints({
   }),
 });
 
-export const { useAddMeatDataMutation } = butcheryApi;
+export const { useGetButcheryAllDataQuery, useAddMeatDataMutation } =
+  butcheryApi;

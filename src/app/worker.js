@@ -14,6 +14,7 @@ export const worker = api.injectEndpoints({
           body,
         };
       },
+      invalidatesTags: ["GETWORKER"],
     }),
   }),
 });

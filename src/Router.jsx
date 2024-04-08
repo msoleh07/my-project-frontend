@@ -17,6 +17,7 @@ import Workers from "./components/workers/Workers";
 import Loader from "./components/loader/Loader";
 import OwnLoader from "./components/ownLoader/OwnLoader";
 import SkeletonPage from "./components/skeleton/Skeleton";
+import Home from "./pages/butchery/home/Home";
 
 const Router = () => {
   let location = useLocation();
@@ -42,9 +43,7 @@ const Router = () => {
             {first === "worker" && (
               <Route path="/" element={<h1>Worker home</h1>} />
             )}
-            {first === "butchery" && (
-              <Route path="/" element={<h1>Butchery home</h1>} />
-            )}
+            {first === "butchery" && <Route path="/" element={<Home />} />}
             <Route path="/own/about" element={<h1>own about</h1>} />
             <Route path="/own/addAdmin" element={<AddAdminCreate />} />
             <Route element={<OwnLayout />}>

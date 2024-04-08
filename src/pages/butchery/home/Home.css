@@ -1,0 +1,82 @@
+.home_brutchery {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bruchery_header_home {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 3px 3px 5px #d6def7, -3px -3px 5px #e7ebf7;
+  border-radius: 10px;
+}
+
+.bruchery_header_home h1 {
+  font-size: 30px;
+  color: #333;
+}
+
+.brutchery_data_container {
+  box-shadow: 3px 3px 5px #d6def7, -3px -3px 5px #e7ebf7;
+  border-radius: 10px;
+  padding: 2%;
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+  gap: 20px;
+}
+
+.brutchery_data_container h2 {
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #d2dcf9;
+  border-top: 1px solid #d2dcf9;
+  background: #d6def779;
+  border-radius: 15px 0 15px 0;
+  color: #000;
+}
+
+.brutchery_data_container ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  padding: 2%;
+  background: #a5a5a552;
+  border-radius: 15px 0 15px 0;
+}
+
+.brutchery_meat_data_ammount {
+}
+
+.text {
+  border-right: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+}
+
+.ammount {
+  padding-left: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.ammount span {
+  padding: 3px 10px;
+  border-radius: 50px;
+  background: #00000022;
+}
+
+.brutchery_meat_full_data {
+  border: 1px solid #d2dcf9;
+  background: #00000009;
+  border-radius: 15px;
+  padding: 2%;
+}
