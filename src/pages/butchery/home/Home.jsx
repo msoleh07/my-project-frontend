@@ -57,8 +57,6 @@ const Home = () => {
     });
   }, [allButcheryData?.data]);
 
-  console.log(data);
-
   return (
     <div className="home_brutchery">
       <div className="bruchery_header_home">
