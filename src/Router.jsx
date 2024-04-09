@@ -18,6 +18,7 @@ import Loader from "./components/loader/Loader";
 import OwnLoader from "./components/ownLoader/OwnLoader";
 import SkeletonPage from "./components/skeleton/Skeleton";
 import Home from "./pages/butchery/home/Home";
+import WorkerHome from "./pages/worker/home/WorkerHome";
 
 const Router = () => {
   let location = useLocation();
@@ -40,9 +41,7 @@ const Router = () => {
             {first === "owner" && (
               <Route path="/" element={<h1>Owner home</h1>} />
             )}
-            {first === "worker" && (
-              <Route path="/" element={<h1>Worker home</h1>} />
-            )}
+            {first === "worker" && <Route path="/" element={<WorkerHome />} />}
             {first === "butchery" && <Route path="/" element={<Home />} />}
             <Route path="/own/about" element={<h1>own about</h1>} />
             <Route path="/own/addAdmin" element={<AddAdminCreate />} />

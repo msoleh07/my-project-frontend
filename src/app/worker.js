@@ -4,7 +4,7 @@ export const worker = api.injectEndpoints({
   endpoints: (builder) => ({
     getAllWorker: builder.query({
       query: () => "/api/workerUser",
-      providesTags: ["GETWORKER"],
+      providesTags: ["GETWORKER", "BUTCHERY"],
     }),
     addData: builder.mutation({
       query(body) {

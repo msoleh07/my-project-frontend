@@ -1,11 +1,11 @@
-.home_brutchery {
+.worker_home_page {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.bruchery_header_home {
+.worker_home_page .bruchery_header_home {
   width: 100%;
   height: 80px;
   display: flex;
@@ -15,12 +15,12 @@
   border-radius: 10px;
 }
 
-.bruchery_header_home h1 {
+.worker_home_page .bruchery_header_home h1 {
   font-size: 30px;
   color: #333;
 }
 
-.brutchery_data_container {
+.worker_home_page .worker_data_container {
   box-shadow: 3px 3px 5px #d6def7, -3px -3px 5px #e7ebf7;
   border-radius: 10px;
   padding: 2%;
@@ -29,7 +29,7 @@
   gap: 20px;
 }
 
-.brutchery_data_container h2 {
+.worker_home_page .worker_data_container h2 {
   text-align: center;
   padding: 20px 0;
   border-bottom: 1px solid #d2dcf9;
@@ -39,7 +39,7 @@
   color: #000;
 }
 
-.brutchery_data_container ul {
+.worker_home_page .worker_data_container ul {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(2, auto);
@@ -49,9 +49,9 @@
 }
 
 /* .brutchery_meat_data_ammount {
-} */
+  } */
 
-.text {
+.worker_home_page .text {
   border-right: 1px solid #000;
   display: flex;
   align-items: center;
@@ -59,7 +59,7 @@
   width: 150px;
 }
 
-.ammount {
+.worker_home_page .ammount {
   padding-left: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -68,13 +68,13 @@
   overflow-y: auto;
 }
 
-.ammount span {
+.worker_home_page .ammount span {
   padding: 3px 10px;
   border-radius: 50px;
   background: #00000022;
 }
 
-.brutchery_meat_full_data {
+.worker_home_page .worker_meat_full_data {
   border: 1px solid #d2dcf9;
   background: #00000009;
   border-radius: 15px;
@@ -84,13 +84,13 @@
   /* gap: 5px; */
 }
 
-.prices_container,
-.ammount_container {
+.worker_home_page .prices_container,
+.worker_home_page .ammount_container {
   display: grid;
   grid-template-columns: repeat(2, auto);
 }
 
-.text_price {
+.worker_home_page .text_price {
   border-right: 1px solid #000;
   display: flex;
   align-items: center;
@@ -98,7 +98,7 @@
   width: 150px;
 }
 
-.ammount_price {
+.worker_home_page .ammount_price {
   padding-left: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -107,7 +107,7 @@
   overflow-y: auto;
 }
 
-.ammount_price h2 {
+.worker_home_page .ammount_price h2 {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
@@ -130,6 +130,6 @@
   background: #00000022;
 }
 
-.brutchery_meat_full_data span {
+.worker_meat_full_data span {
   text-align: center;
 }
