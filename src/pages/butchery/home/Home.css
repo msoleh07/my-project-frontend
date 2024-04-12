@@ -66,12 +66,35 @@
   gap: 5px;
   max-height: 150px;
   overflow-y: auto;
+  justify-content: center;
 }
 
 .ammount span {
   padding: 3px 10px;
   border-radius: 50px;
   background: #00000022;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add_name_and_time {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #d2dcf9;
+  gap: 5px;
+  justify-content: space-between;
+}
+
+.add_name_and_time .name_border {
+  background: none;
+  border-radius: 0 0 0 0;
+  font-size: 10px;
+}
+
+.add_name_and_time .time {
+  font-size: 10px;
 }
 
 .brutchery_meat_full_data {

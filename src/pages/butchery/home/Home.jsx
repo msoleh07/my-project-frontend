@@ -17,20 +17,18 @@ const Home = () => {
     addMeat: [null],
     addMincedMeat: [null],
   });
+
   useEffect(() => {
     let findUser = allButcheryData?.data?.innerData.find(
       (f) => f.username === username
     );
 
     const date = new Date();
-
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
-
     const today = `${year}-${month}-${day}`;
 
-    // Bugungi sana bilan mos keladigan addMeatKg obyektlarini topish
     const addMeatKg = findUser?.addMeatKg.filter((addTime) => {
       const itemDate = new Date(addTime.addetTime)
         .toISOString()
@@ -38,7 +36,6 @@ const Home = () => {
       return itemDate === today;
     });
 
-    // Bugungi sana bilan mos keladigan addMeat obyektlarini topish
     const addMeat = findUser?.addMeat.filter((addTime) => {
       const itemDate = new Date(addTime.addetTime)
         .toISOString()
@@ -46,7 +43,6 @@ const Home = () => {
       return itemDate === today;
     });
 
-    // Bugungi sana bilan mos keladigan addMincedMeat obyektlarini topish
     const addMincedMeat = findUser?.addMincedMeat.filter((addTime) => {
       const itemDate = new Date(addTime.addetTime)
         .toISOString()
@@ -54,19 +50,11 @@ const Home = () => {
       return itemDate === today;
     });
 
-    // console.log(
-    //   "addMeatKg:",
-    //   addMeatKg,
-    //   "addMeat",
-    //   addMeat,
-    //   "addMincedMeat:",
-    //   addMincedMeat
-    // );
-
     setData({
-      addMeat: addMeat?.map((q) => q?.meat?.quantity),
-      addMeatKg: addMeatKg?.map((q) => q?.meatKg?.quantity),
-      addMincedMeat: addMincedMeat?.map((q) => q?.mincedMeat?.quantity),
+      // addMeat: addMeat?.map((q) => q?.meat),
+      addMeat: addMeat,
+      addMeatKg: addMeatKg,
+      addMincedMeat: addMincedMeat,
     });
 
     setAmoutTolatPrices({
@@ -96,6 +84,15 @@ const Home = () => {
     return new Intl.NumberFormat("uz-UZ").format(number);
   };
 
+  const getFormattedTime = (dateTimeString) => {
+    if (!dateTimeString) return ""; // Agar berilgan vaqt bo'sh bo'lsa, bo'sh qaytariladi
+    const dateTime = new Date(dateTimeString);
+    const hours = dateTime.getHours().toString().padStart(2, "0");
+    const minutes = dateTime.getMinutes().toString().padStart(2, "0");
+    const seconds = dateTime.getSeconds().toString().padStart(2, "0");
+    return `${hours}:${minutes}:${seconds}`;
+  };
+
   return (
     <div className="home_brutchery">
       {allButcheryData.isLoading ? (
@@ -113,7 +110,17 @@ const Home = () => {
               <li className="ammount">
                 {data?.addMeat?.length > 0 ? (
                   data?.addMeat?.map((item, index) => (
-                    <span key={index}>{item + " dona"}</span>
+                    <span key={index}>
+                      {item?.meat?.quantity + " dona"}
+                      <div className="add_name_and_time">
+                        <span className="name_border">
+                          {item?.meat?.addWorkerName}
+                        </span>
+                        <div className="time">
+                          {getFormattedTime(item?.meat?.addetTime)}
+                        </div>
+                      </div>
+                    </span>
                   ))
                 ) : (
                   <span>Bugun malumot qoshilmadi</span>
@@ -128,7 +135,10 @@ const Home = () => {
                     <div className="ammount_price">
                       {amoutTolatPrices?.addMeat?.length > 0 ? (
                         <h2>
-                          {data?.addMeat?.reduce((a, b) => a + b, 0)}
+                          {data?.addMeat?.reduce(
+                            (a, b) => a + b?.meat?.quantity,
+                            0
+                          )}
                           <span>dona</span>
                         </h2>
                       ) : (
@@ -161,8 +171,18 @@ const Home = () => {
               <li className="text">Soni:</li>
               <li className="ammount">
                 {data?.addMincedMeat?.length > 0 ? (
-                  data?.addMincedMeat?.map((item, inx) => (
-                    <span key={inx}>{item + " dona"}</span>
+                  data?.addMincedMeat?.map((item, index) => (
+                    <span key={index}>
+                      {item?.mincedMeat?.quantity + " dona"}
+                      <div className="add_name_and_time">
+                        <span className="name_border">
+                          {item?.mincedMeat?.addWorkerName}
+                        </span>
+                        <div className="time">
+                          {getFormattedTime(item?.mincedMeat?.addetTime)}
+                        </div>
+                      </div>
+                    </span>
                   ))
                 ) : (
                   <span>Bugun malumot qoshilmadi</span>
@@ -177,7 +197,10 @@ const Home = () => {
                     <div className="ammount_price">
                       {amoutTolatPrices?.addMincedMeat?.length > 0 ? (
                         <h2>
-                          {data?.addMincedMeat?.reduce((a, b) => a + b, 0)}
+                          {data?.addMincedMeat?.reduce(
+                            (a, b) => a + b?.mincedMeat?.quantity,
+                            0
+                          )}
                           <span>dona</span>
                         </h2>
                       ) : (
@@ -210,8 +233,8 @@ const Home = () => {
               <li className="text">Soni:</li>
               <li className="ammount">
                 {data?.addMeatKg?.length > 0 ? (
-                  data?.addMeatKg?.map((item, inx) => (
-                    <span key={inx}>{item + " kg"}</span>
+                  data?.addMeatKg?.map((item, index) => (
+                    <span key={index}>{item?.meatKg?.quantity + " dona"}</span>
                   ))
                 ) : (
                   <span>Bugun malumot qoshilmadi</span>
@@ -226,7 +249,10 @@ const Home = () => {
                     <div className="ammount_price">
                       {amoutTolatPrices?.addMeatKg?.length > 0 ? (
                         <h2>
-                          {data?.addMeatKg?.reduce((a, b) => a + b, 0)}
+                          {data?.addMeatKg?.reduce(
+                            (a, b) => a + b?.meatKg?.quantity,
+                            0
+                          )}
                           <span>kg</span>
                         </h2>
                       ) : (

@@ -16,20 +16,59 @@ const WorkerHome = () => {
     addMeat: [null],
     addMincedMeat: [null],
   });
+  // useEffect(() => {
+  //   let findUser = getAllWorker?.data?.innerData.find(
+  //     (f) => f.username === username
+  //   );
+
+  //   const date = new Date();
+
+  //   const year = date.getFullYear();
+  //   const month = String(date.getMonth() + 1).padStart(2, "0");
+  //   const day = String(date.getDate()).padStart(2, "0");
+
+  //   const today = `${year}-${month}-${day}`;
+
+  //   // Bugungi sana bilan mos keladigan addMeat obyektlarini topish
+  //   const addMeat = findUser?.addMeat.filter((addTime) => {
+  //     const itemDate = new Date(addTime.addetTime)
+  //       .toISOString()
+  //       .substring(0, 10);
+  //     return itemDate === today;
+  //   });
+
+  //   // Bugungi sana bilan mos keladigan addMincedMeat obyektlarini topish
+  //   const addMincedMeat = findUser?.addMincedMeat.filter((addTime) => {
+  //     const itemDate = new Date(addTime.addetTime)
+  //       .toISOString()
+  //       .substring(0, 10);
+  //     return itemDate === today;
+  //   });
+
+  //   // console.log("addMeat", addMeat, "addMincedMeat:", addMincedMeat);
+
+  //   setData({
+  //     addMeat: addMeat?.map((q) => q?.meat?.quantity),
+  //     addMincedMeat: addMincedMeat?.map((q) => q?.mincedMeat?.quantity),
+  //   });
+
+  //   setAmoutTolatPrices({
+  //     addMeat: addMeat?.map((m) => m?.money?.totalMoney),
+  //     addMincedMeat: addMincedMeat?.map((m) => m?.money?.totalMoney),
+  //   });
+  // }, [getAllWorker?.data]);
+
   useEffect(() => {
     let findUser = getAllWorker?.data?.innerData.find(
       (f) => f.username === username
     );
 
     const date = new Date();
-
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
-
     const today = `${year}-${month}-${day}`;
 
-    // Bugungi sana bilan mos keladigan addMeat obyektlarini topish
     const addMeat = findUser?.addMeat.filter((addTime) => {
       const itemDate = new Date(addTime.addetTime)
         .toISOString()
@@ -37,7 +76,6 @@ const WorkerHome = () => {
       return itemDate === today;
     });
 
-    // Bugungi sana bilan mos keladigan addMincedMeat obyektlarini topish
     const addMincedMeat = findUser?.addMincedMeat.filter((addTime) => {
       const itemDate = new Date(addTime.addetTime)
         .toISOString()
@@ -45,11 +83,9 @@ const WorkerHome = () => {
       return itemDate === today;
     });
 
-    // console.log("addMeat", addMeat, "addMincedMeat:", addMincedMeat);
-
     setData({
-      addMeat: addMeat?.map((q) => q?.meat?.quantity),
-      addMincedMeat: addMincedMeat?.map((q) => q?.mincedMeat?.quantity),
+      addMeat: addMeat,
+      addMincedMeat: addMincedMeat,
     });
 
     setAmoutTolatPrices({
@@ -57,7 +93,6 @@ const WorkerHome = () => {
       addMincedMeat: addMincedMeat?.map((m) => m?.money?.totalMoney),
     });
   }, [getAllWorker?.data]);
-
   let meatSubtotal = amoutTolatPrices?.addMeat?.reduce((a, b) => a + b, 0);
   let mincedMeatSubtotal = amoutTolatPrices?.addMincedMeat?.reduce(
     (a, b) => a + b,
@@ -73,6 +108,15 @@ const WorkerHome = () => {
 
   const formatNumber = (number) => {
     return new Intl.NumberFormat("uz-UZ").format(number);
+  };
+
+  const getFormattedTime = (dateTimeString) => {
+    if (!dateTimeString) return ""; // Agar berilgan vaqt bo'sh bo'lsa, bo'sh qaytariladi
+    const dateTime = new Date(dateTimeString);
+    const hours = dateTime.getHours().toString().padStart(2, "0");
+    const minutes = dateTime.getMinutes().toString().padStart(2, "0");
+    const seconds = dateTime.getSeconds().toString().padStart(2, "0");
+    return `${hours}:${minutes}:${seconds}`;
   };
 
   return (
@@ -92,7 +136,17 @@ const WorkerHome = () => {
               <li className="ammount">
                 {data?.addMeat?.length > 0 ? (
                   data?.addMeat?.map((item, index) => (
-                    <span key={index}>{item + " dona"}</span>
+                    <span key={index}>
+                      {item?.meat?.quantity + " dona"}
+                      <div className="add_name_and_time">
+                        <span className="name_border">
+                          {item?.meat?.addWorkerName}
+                        </span>
+                        <div className="time">
+                          {getFormattedTime(item?.meat?.addetTime)}
+                        </div>
+                      </div>
+                    </span>
                   ))
                 ) : (
                   <span>Bugun malumot qoshilmadi</span>
@@ -107,7 +161,10 @@ const WorkerHome = () => {
                     <div className="ammount_price">
                       {amoutTolatPrices?.addMeat?.length > 0 ? (
                         <h2>
-                          {data?.addMeat?.reduce((a, b) => a + b, 0)}
+                          {data?.addMeat?.reduce(
+                            (a, b) => a + b?.meat?.quantity,
+                            0
+                          )}
                           <span>dona</span>
                         </h2>
                       ) : (
@@ -140,8 +197,18 @@ const WorkerHome = () => {
               <li className="text">Soni:</li>
               <li className="ammount">
                 {data?.addMincedMeat?.length > 0 ? (
-                  data?.addMincedMeat?.map((item, inx) => (
-                    <span key={inx}>{item + " dona"}</span>
+                  data?.addMincedMeat?.map((item, index) => (
+                    <span key={index}>
+                      {item?.mincedMeat?.quantity + " dona"}
+                      <div className="add_name_and_time">
+                        <span className="name_border">
+                          {item?.mincedMeat?.addWorkerName}
+                        </span>
+                        <div className="time">
+                          {getFormattedTime(item?.mincedMeat?.addetTime)}
+                        </div>
+                      </div>
+                    </span>
                   ))
                 ) : (
                   <span>Bugun malumot qoshilmadi</span>
@@ -156,7 +223,10 @@ const WorkerHome = () => {
                     <div className="ammount_price">
                       {amoutTolatPrices?.addMincedMeat?.length > 0 ? (
                         <h2>
-                          {data?.addMincedMeat?.reduce((a, b) => a + b, 0)}
+                          {data?.addMincedMeat?.reduce(
+                            (a, b) => a + b?.mincedMeat?.quantity,
+                            0
+                          )}
                           <span>dona</span>
                         </h2>
                       ) : (
