@@ -16,7 +16,21 @@ export const worker = api.injectEndpoints({
       },
       invalidatesTags: ["GETWORKER"],
     }),
+    workerUserDeleteOne: builder.mutation({
+      query(body) {
+        let { id } = body;
+        return {
+          url: `/api/workerUser/deleteOneUser/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["GETWORKER"],
+    }),
   }),
 });
 
-export const { useGetAllWorkerQuery, useAddDataMutation } = worker;
+export const {
+  useGetAllWorkerQuery,
+  useAddDataMutation,
+  useWorkerUserDeleteOneMutation,
+} = worker;

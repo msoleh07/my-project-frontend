@@ -16,8 +16,21 @@ export const butcheryApi = api.injectEndpoints({
       },
       invalidatesTags: ["BUTCHERY"],
     }),
+    butcheryUserDeleteOne: builder.mutation({
+      query(body) {
+        let { id } = body;
+        return {
+          url: `/api/butcheryUser/deleteOneUser/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["BUTCHERY"],
+    }),
   }),
 });
 
-export const { useGetButcheryAllDataQuery, useAddMeatDataMutation } =
-  butcheryApi;
+export const {
+  useGetButcheryAllDataQuery,
+  useAddMeatDataMutation,
+  useButcheryUserDeleteOneMutation,
+} = butcheryApi;
