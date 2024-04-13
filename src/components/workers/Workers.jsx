@@ -23,8 +23,11 @@ const Workers = () => {
 
   useEffect(() => {
     setButcheryData(getButcheryAllData?.data?.innerData || []);
-    setWorkerData(getAllWorker?.data?.innerData || []);
   }, [getButcheryAllData?.data]);
+
+  useEffect(() => {
+    setWorkerData(getAllWorker?.data?.innerData || []);
+  }, [getAllWorker?.data]);
 
   async function workerUserDelete(id) {
     try {
