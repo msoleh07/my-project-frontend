@@ -29,21 +29,21 @@ const Home = () => {
     const day = String(date.getDate()).padStart(2, "0");
     const today = `${year}-${month}-${day}`;
 
-    const addMeatKg = findUser?.addMeatKg.filter((addTime) => {
+    const addMeatKg = findUser?.addMeatKg?.filter((addTime) => {
       const itemDate = new Date(addTime.addetTime)
         .toISOString()
         .substring(0, 10);
       return itemDate === today;
     });
 
-    const addMeat = findUser?.addMeat.filter((addTime) => {
+    const addMeat = findUser?.addMeat?.filter((addTime) => {
       const itemDate = new Date(addTime.addetTime)
         .toISOString()
         .substring(0, 10);
       return itemDate === today;
     });
 
-    const addMincedMeat = findUser?.addMincedMeat.filter((addTime) => {
+    const addMincedMeat = findUser?.addMincedMeat?.filter((addTime) => {
       const itemDate = new Date(addTime.addetTime)
         .toISOString()
         .substring(0, 10);

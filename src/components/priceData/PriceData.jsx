@@ -238,7 +238,7 @@ const PriceData = () => {
                     <p>To'rgamchi narxi</p>
                     {shashlikData?.map((item, index) => (
                       <div key={index}>
-                        {shashlikData?.length ? (
+                        {shashlikData?.length > 0 ? (
                           <b>{formatNumber(item?.meat)} so'm</b>
                         ) : (
                           <>
@@ -253,7 +253,7 @@ const PriceData = () => {
                     <p>Qiyma narxi</p>
                     {shashlikData?.map((item, index) => (
                       <div key={index}>
-                        {shashlikData?.length ? (
+                        {shashlikData?.length > 0 ? (
                           <b>{formatNumber(item?.mincedMeat)} so'm</b>
                         ) : (
                           <>
@@ -343,7 +343,7 @@ const PriceData = () => {
                     <p>To'rgamchi narxi</p>
                     {goshtData?.map((item, index) => (
                       <div key={index}>
-                        {goshtData?.length ? (
+                        {goshtData?.length > 0 ? (
                           <b>{formatNumber(item?.meat)} so'm</b>
                         ) : (
                           <>
@@ -358,7 +358,7 @@ const PriceData = () => {
                     <p>Qiyma narxi</p>
                     {goshtData?.map((item, index) => (
                       <div key={index}>
-                        {goshtData?.length ? (
+                        {goshtData?.length > 0 ? (
                           <b>{formatNumber(item?.mincedMeat)} so'm</b>
                         ) : (
                           <>
@@ -373,7 +373,7 @@ const PriceData = () => {
                     <p>Gosht Kg</p>
                     {goshtData?.map((item, index) => (
                       <div key={index}>
-                        {goshtData?.length ? (
+                        {goshtData?.length > 0 ? (
                           <b>{formatNumber(item?.meatKG)} so'm</b>
                         ) : (
                           <>
