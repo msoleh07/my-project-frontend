@@ -3,6 +3,7 @@ import "./OwnerHome.css";
 import { useGetButcheryAllDataQuery } from "../../../app/butchery";
 
 const OwnerHome = () => {
+  const [todayData, setTodayData] = useState([]);
   const getData = (e) => {
     e.preventDefault();
     // e.target.reset();
@@ -25,7 +26,50 @@ const OwnerHome = () => {
   const day = String(date.getDate()).padStart(2, "0");
   const today = `${year}-${month}-${day}`;
 
-  console.log(information);
+  const addMeatDataTodey = (data) => {
+    const filteredData = data
+      ? data
+          .filter((addTime) => {
+            const itemDate = new Date(addTime.addetTime)
+              .toISOString()
+              .substring(0, 10);
+            return itemDate === today;
+          })
+          .map((i) => i?.meat?.quantity)
+      : [];
+
+    return filteredData.length ? filteredData : ["Malumot yo`q"];
+  };
+
+  const addMincedMeatDataTodey = (data) => {
+    const filteredData = data
+      ? data
+          .filter((addTime) => {
+            const itemDate = new Date(addTime.addetTime)
+              .toISOString()
+              .substring(0, 10);
+            return itemDate === today;
+          })
+          .map((i) => i?.mincedMeat?.quantity)
+      : [];
+
+    return filteredData.length ? filteredData : ["Malumot yo`q"];
+  };
+
+  const addMeatKgDataTodey = (data) => {
+    const filteredData = data
+      ? data
+          .filter((addTime) => {
+            const itemDate = new Date(addTime.addetTime)
+              .toISOString()
+              .substring(0, 10);
+            return itemDate === today;
+          })
+          .map((i) => i?.meatKg?.quantity)
+      : [];
+
+    return filteredData.length ? filteredData : ["Malumot yo`q"];
+  };
 
   return (
     <div className="owner_home_page">
@@ -41,77 +85,101 @@ const OwnerHome = () => {
           <h2>Go'shxona malumotlari</h2>
         </div>
         <div className="formation_container">
-          <ul className="information_table_list">
-            <li className="information_name_header">Muhammadsoleh</li>
-            <div className="information_table_container">
-              <li className="work_information">
-                <div className="work_data_container">
-                  <span className="work_name">To'rg'amchi:</span>
-                  <div className="work_information_ammount">
-                    <span>000</span>
-                    <span>000</span>
-                    <span>000</span>
-                    <span>000</span>
-                    <span>000</span>
+          {information?.map((item, index) => (
+            <ul key={index} className="information_table_list">
+              <li className="information_name_header">{item?.firstname}</li>
+              <div className="information_table_container">
+                <li className="work_information">
+                  <div className="work_data_container">
+                    <span className="work_name">To'rg'amchi:</span>
+                    <div className="work_information_ammount">
+                      {addMeatDataTodey(item?.addMeat)?.map(
+                        (quantity, index) => (
+                          <span key={index}>
+                            {quantity}
+                            {quantity === "Malumot yo`q" ? "" : " dona"}
+                          </span>
+                        )
+                      )}
+                    </div>
                   </div>
-                </div>
-                <div className="work_total_data_container">
-                  <div className="total_count_ammoun">
-                    <span>Jami:</span>
-                    <p>123456 dona</p>
+                  <div className="work_total_data_container">
+                    <div className="total_count_ammoun">
+                      <span>Jami:</span>
+                      <div className="price_list">
+                        234567
+                        <div className="ammount_text">dona</div>
+                      </div>
+                    </div>
+                    <div className="total_prices_data">
+                      <span>Pull:</span>
+                      <div className="price_list">
+                        123456 <div className="price_text">so'm</div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="total_prices_data">
-                    <span>Pull:</span>
-                    <p>123456 so'm</p>
+                </li>
+                <li className="work_information">
+                  <div className="work_data_container">
+                    <span className="work_name">Qiyma:</span>
+                    <div className="work_information_ammount">
+                      {addMincedMeatDataTodey(item?.addMincedMeat)?.map(
+                        (quantity, index) => (
+                          <span key={index}>
+                            {quantity}
+                            {quantity === "Malumot yo`q" ? "" : " dona"}
+                          </span>
+                        )
+                      )}
+                    </div>
                   </div>
-                </div>
-              </li>
-              <li className="work_information">
-                <div className="work_data_container">
-                  <span className="work_name">Qiyma:</span>
-                  <div className="work_information_ammount">
-                    <span>000</span>
-                    <span>000</span>
-                    <span>000</span>
-                    <span>000</span>
-                    <span>000</span>
+                  <div className="work_total_data_container">
+                    <div className="total_count_ammoun">
+                      <span>Jami:</span>
+                      <div className="price_list">
+                        123456 <div className="ammount_text">dona</div>
+                      </div>
+                    </div>
+                    <div className="total_prices_data">
+                      <span>Pull:</span>
+                      <div className="price_list">
+                        123456 <div className="price_text">so'm</div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="work_total_data_container">
-                  <div className="total_count_ammoun">
-                    <span>Jami:</span>
-                    <p>123456 dona</p>
+                </li>
+                <li className="work_information">
+                  <div className="work_data_container">
+                    <span className="work_name">Son go'sht:</span>
+                    <div className="work_information_ammount">
+                      {addMeatKgDataTodey(item?.addMeatKg)?.map(
+                        (quantity, index) => (
+                          <span key={index}>
+                            {quantity}
+                            {quantity === "Malumot yo`q" ? "" : " kg"}
+                          </span>
+                        )
+                      )}
+                    </div>
                   </div>
-                  <div className="total_prices_data">
-                    <span>Pull:</span>
-                    <p>123456 so'm</p>
+                  <div className="work_total_data_container">
+                    <div className="total_count_ammoun">
+                      <span>Jami:</span>
+                      <div className="price_list">
+                        123456 <div className="ammount_text">dona</div>
+                      </div>
+                    </div>
+                    <div className="total_prices_data">
+                      <span>Pull:</span>
+                      <div className="price_list">
+                        123456 <div className="price_text">so'm</div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </li>
-              <li className="work_information">
-                <div className="work_data_container">
-                  <span className="work_name">Son go'sht:</span>
-                  <div className="work_information_ammount">
-                    <span>000</span>
-                    <span>000</span>
-                    <span>000</span>
-                    <span>000</span>
-                    <span>000</span>
-                  </div>
-                </div>
-                <div className="work_total_data_container">
-                  <div className="total_count_ammoun">
-                    <span>Jami:</span>
-                    <p>123456 dona</p>
-                  </div>
-                  <div className="total_prices_data">
-                    <span>Pull:</span>
-                    <p>123456 so'm</p>
-                  </div>
-                </div>
-              </li>
-            </div>
-          </ul>
+                </li>
+              </div>
+            </ul>
+          ))}
         </div>
       </div>
     </div>

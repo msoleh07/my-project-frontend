@@ -75,6 +75,9 @@
   border: 1px solid #000;
   border-radius: 10px;
   padding: 2%;
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+  gap: 20px;
 }
 
 .information_table_list {
@@ -114,14 +117,13 @@
   border: 1px solid #000;
   border-radius: 10px;
   padding: 3% 2%;
-  gap: 20px;
+  /* gap: 20px; */
 }
 
 .work_data_container {
   display: grid;
   grid-template-columns: repeat(2, auto);
   border-bottom: 1px solid #000;
-  padding: 10px 0;
 }
 
 .work_name {
@@ -141,6 +143,7 @@
   flex-wrap: wrap;
   gap: 10px;
   padding-left: 5px;
+  padding: 10px;
 }
 
 .work_information_ammount span {
@@ -173,4 +176,20 @@
   align-items: center;
   justify-content: center;
   padding: 10px 0;
+}
+.total_prices_data .price_list,
+.total_count_ammoun .price_list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+}
+
+.total_prices_data .price_list .price_text,
+.total_count_ammoun .price_list .ammount_text {
+  font-size: 12px;
+  color: #333232;
 }

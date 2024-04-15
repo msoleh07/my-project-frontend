@@ -234,7 +234,7 @@ const Home = () => {
               <li className="ammount">
                 {data?.addMeatKg?.length > 0 ? (
                   data?.addMeatKg?.map((item, index) => (
-                    <span key={index}>{item?.meatKg?.quantity + " dona"}</span>
+                    <span key={index}>{item?.meatKg?.quantity + " kg"}</span>
                   ))
                 ) : (
                   <span>Bugun malumot qoshilmadi</span>
