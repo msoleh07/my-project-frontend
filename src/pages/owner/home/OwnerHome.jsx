@@ -107,7 +107,14 @@ const OwnerHome = () => {
                     <div className="total_count_ammoun">
                       <span>Jami:</span>
                       <div className="price_list">
-                        234567
+                        {addMeatDataTodey(item?.addMeat)?.find(
+                          (d) => d === "Malumot yo`q"
+                        )
+                          ? 0
+                          : addMeatDataTodey(item?.addMeat)?.reduce(
+                              (a, b) => a + b,
+                              0
+                            )}
                         <div className="ammount_text">dona</div>
                       </div>
                     </div>
@@ -137,7 +144,15 @@ const OwnerHome = () => {
                     <div className="total_count_ammoun">
                       <span>Jami:</span>
                       <div className="price_list">
-                        123456 <div className="ammount_text">dona</div>
+                        {addMincedMeatDataTodey(item?.addMincedMeat)?.find(
+                          (d) => d === "Malumot yo`q"
+                        )
+                          ? 0
+                          : addMincedMeatDataTodey(item?.addMincedMeat)?.reduce(
+                              (a, b) => a + b,
+                              0
+                            )}
+                        <div className="ammount_text">dona</div>
                       </div>
                     </div>
                     <div className="total_prices_data">
@@ -166,7 +181,16 @@ const OwnerHome = () => {
                     <div className="total_count_ammoun">
                       <span>Jami:</span>
                       <div className="price_list">
-                        123456 <div className="ammount_text">dona</div>
+                        {addMeatKgDataTodey(item?.addMeatKg)?.find(
+                          (d) => d === "Malumot yo`q"
+                        )
+                          ? 0
+                          : addMeatKgDataTodey(item?.addMeatKg)?.reduce(
+                              (a, b) => a + b,
+                              0
+                            )}
+
+                        <div className="ammount_text">kg</div>
                       </div>
                     </div>
                     <div className="total_prices_data">
