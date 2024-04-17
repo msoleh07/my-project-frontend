@@ -3,13 +3,18 @@ import "./OwnerHome.css";
 import { useGetButcheryAllDataQuery } from "../../../app/butchery";
 
 const OwnerHome = () => {
-  const [todayData, setTodayData] = useState([]);
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const today = `${year}-${month}-${day}`;
+  const [todayData, setTodayData] = useState(today);
   const getData = (e) => {
     e.preventDefault();
-    // e.target.reset();
     let data = new FormData(e.target);
     let value = Object.fromEntries(data);
-    console.log(value);
+    setTodayData(value?.data);
+    e.target.reset();
   };
 
   const allButcheryData = useGetButcheryAllDataQuery();
@@ -20,11 +25,11 @@ const OwnerHome = () => {
     setInformation(findUser?.length > 0 ? findUser : []);
   }, [allButcheryData?.data]);
 
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  const today = `${year}-${month}-${day}`;
+  // const date = new Date();
+  // const year = date.getFullYear();
+  // const month = String(date.getMonth() + 1).padStart(2, "0");
+  // const day = String(date.getDate()).padStart(2, "0");
+  // const today = `${year}-${month}-${day}`;
 
   const addMeatDataTodey = (data) => {
     const filteredData = data
@@ -33,7 +38,7 @@ const OwnerHome = () => {
             const itemDate = new Date(addTime.addetTime)
               .toISOString()
               .substring(0, 10);
-            return itemDate === today;
+            return itemDate === todayData;
           })
           .map((i) => i?.meat?.quantity)
       : [];
@@ -48,7 +53,7 @@ const OwnerHome = () => {
             const itemDate = new Date(addTime.addetTime)
               .toISOString()
               .substring(0, 10);
-            return itemDate === today;
+            return itemDate === todayData;
           })
           .map((i) => i?.mincedMeat?.quantity)
       : [];
@@ -63,12 +68,63 @@ const OwnerHome = () => {
             const itemDate = new Date(addTime.addetTime)
               .toISOString()
               .substring(0, 10);
-            return itemDate === today;
+            return itemDate === todayData;
           })
           .map((i) => i?.meatKg?.quantity)
       : [];
 
     return filteredData.length ? filteredData : ["Malumot yo`q"];
+  };
+
+  // totall prices todayData find function
+
+  const addMeatPriceTodey = (data) => {
+    const filteredData = data
+      ? data
+          .filter((addTime) => {
+            const itemDate = new Date(addTime.addetTime)
+              .toISOString()
+              .substring(0, 10);
+            return itemDate === todayData;
+          })
+          .map((i) => i?.money?.totalMoney)
+      : [];
+
+    return filteredData.length ? filteredData : [0];
+  };
+
+  const addMincedMeatPriceTodey = (data) => {
+    const filteredData = data
+      ? data
+          .filter((addTime) => {
+            const itemDate = new Date(addTime.addetTime)
+              .toISOString()
+              .substring(0, 10);
+            return itemDate === todayData;
+          })
+          .map((i) => i?.money?.totalMoney)
+      : [];
+
+    return filteredData.length ? filteredData : [0];
+  };
+
+  const addMeatKgPriceTodey = (data) => {
+    const filteredData = data
+      ? data
+          .filter((addTime) => {
+            const itemDate = new Date(addTime.addetTime)
+              .toISOString()
+              .substring(0, 10);
+            return itemDate === todayData;
+          })
+          .map((i) => i?.money?.totalMoney)
+      : [];
+
+    return filteredData.length ? filteredData : [0];
+  };
+
+  const formatNumber = (number) => {
+    return new Intl.NumberFormat("uz-UZ").format(number);
   };
 
   return (
@@ -121,8 +177,20 @@ const OwnerHome = () => {
                     <div className="total_prices_data">
                       <span>Pull:</span>
                       <div className="price_list">
-                        123456 <div className="price_text">so'm</div>
+                        {formatNumber(
+                          addMeatPriceTodey(item?.addMeat)?.reduce(
+                            (a, b) => a + b,
+                            0
+                          )
+                        )}
+                        <div className="price_text">so'm</div>
                       </div>
+                    </div>
+                    <div className="total_time_data">
+                      <span>
+                        {todayData === today ? "Sana:" : "Qidirgan sana:"}
+                      </span>
+                      <div className="time_list">{todayData}</div>
                     </div>
                   </div>
                 </li>
@@ -158,8 +226,20 @@ const OwnerHome = () => {
                     <div className="total_prices_data">
                       <span>Pull:</span>
                       <div className="price_list">
-                        123456 <div className="price_text">so'm</div>
+                        {formatNumber(
+                          addMincedMeatPriceTodey(item?.addMincedMeat)?.reduce(
+                            (a, b) => a + b,
+                            0
+                          )
+                        )}
+                        <div className="price_text">so'm</div>
                       </div>
+                    </div>
+                    <div className="total_time_data">
+                      <span>
+                        {todayData === today ? "Sana:" : "Qidirgan sana:"}
+                      </span>
+                      <div className="time_list">{todayData}</div>
                     </div>
                   </div>
                 </li>
@@ -196,8 +276,20 @@ const OwnerHome = () => {
                     <div className="total_prices_data">
                       <span>Pull:</span>
                       <div className="price_list">
-                        123456 <div className="price_text">so'm</div>
+                        {formatNumber(
+                          addMeatKgPriceTodey(item?.addMeatKg)?.reduce(
+                            (a, b) => a + b,
+                            0
+                          )
+                        )}
+                        <div className="price_text">so'm</div>
                       </div>
+                    </div>
+                    <div className="total_time_data">
+                      <span>
+                        {todayData === today ? "Sana:" : "Qidirgan sana:"}
+                      </span>
+                      <div className="time_list">{todayData}</div>
                     </div>
                   </div>
                 </li>
