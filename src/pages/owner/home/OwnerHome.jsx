@@ -130,7 +130,7 @@ const OwnerHome = () => {
   return (
     <div className="owner_home_page">
       <div className="owner_home_header">
-        <h1>Bugungi malumotlar</h1>
+        <h1>{todayData === today ? "Bugungi malumotlar" : "Qidirgan sana"}</h1>
         <form onSubmit={getData}>
           <input type="date" name="data" required />
           <button>Qidirish</button>
