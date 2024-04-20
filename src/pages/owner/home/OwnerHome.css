@@ -152,6 +152,32 @@
   border: 1px solid #000;
 }
 
+.info_container {
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.info_qtn {
+  text-align: center;
+  border-bottom: 1px solid #000;
+  padding-bottom: 5px;
+}
+
+.info_add_name_and_time {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.info_name_border,
+.info_time {
+  font-size: 10px;
+}
+
 .work_total_data_container {
   display: grid;
   grid-template-columns: repeat(1, auto);

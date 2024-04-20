@@ -16,47 +16,6 @@ const WorkerHome = () => {
     addMeat: [null],
     addMincedMeat: [null],
   });
-  // useEffect(() => {
-  //   let findUser = getAllWorker?.data?.innerData.find(
-  //     (f) => f.username === username
-  //   );
-
-  //   const date = new Date();
-
-  //   const year = date.getFullYear();
-  //   const month = String(date.getMonth() + 1).padStart(2, "0");
-  //   const day = String(date.getDate()).padStart(2, "0");
-
-  //   const today = `${year}-${month}-${day}`;
-
-  //   // Bugungi sana bilan mos keladigan addMeat obyektlarini topish
-  //   const addMeat = findUser?.addMeat.filter((addTime) => {
-  //     const itemDate = new Date(addTime.addetTime)
-  //       .toISOString()
-  //       .substring(0, 10);
-  //     return itemDate === today;
-  //   });
-
-  //   // Bugungi sana bilan mos keladigan addMincedMeat obyektlarini topish
-  //   const addMincedMeat = findUser?.addMincedMeat.filter((addTime) => {
-  //     const itemDate = new Date(addTime.addetTime)
-  //       .toISOString()
-  //       .substring(0, 10);
-  //     return itemDate === today;
-  //   });
-
-  //   // console.log("addMeat", addMeat, "addMincedMeat:", addMincedMeat);
-
-  //   setData({
-  //     addMeat: addMeat?.map((q) => q?.meat?.quantity),
-  //     addMincedMeat: addMincedMeat?.map((q) => q?.mincedMeat?.quantity),
-  //   });
-
-  //   setAmoutTolatPrices({
-  //     addMeat: addMeat?.map((m) => m?.money?.totalMoney),
-  //     addMincedMeat: addMincedMeat?.map((m) => m?.money?.totalMoney),
-  //   });
-  // }, [getAllWorker?.data]);
 
   useEffect(() => {
     let findUser = getAllWorker?.data?.innerData.find(
