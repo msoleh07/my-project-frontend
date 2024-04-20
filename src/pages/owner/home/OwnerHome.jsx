@@ -26,10 +26,13 @@ const OwnerHome = () => {
 
   useEffect(() => {
     const findUser = allButcheryData?.data?.innerData;
-    const findWorker = getAllWorker?.data?.innerData;
     setInformation(findUser?.length > 0 ? findUser : []);
-    setWorkerInformation(findWorker?.length > 0 ? findWorker : []);
   }, [allButcheryData?.data]);
+
+  useEffect(() => {
+    const findWorker = getAllWorker?.data?.innerData;
+    setWorkerInformation(findWorker?.length > 0 ? findWorker : []);
+  }, [getAllWorker?.data]);
 
   // console.log(workerInformation);
   const addMeatDataTodey = (data) => {
