@@ -279,6 +279,28 @@ const Home = () => {
                 <span>Bugun malumot qoshilmadi</span>
               )}
             </div>
+            <h2>Umumiy narx</h2>
+            <div className="brutchery_meat_full_data">
+              {meatKgSubtotal + mincedMeatSubtotal + meatSubtotal > 0 ? (
+                <div className="ammount_container">
+                  <div className="text_price">Opshi summa:</div>
+                  <div className="ammount_price">
+                    {meatKgSubtotal + mincedMeatSubtotal + meatSubtotal > 0 ? (
+                      <h2>
+                        {formatNumber(
+                          meatKgSubtotal + mincedMeatSubtotal + meatSubtotal
+                        )}
+                        <span>so'm</span>
+                      </h2>
+                    ) : (
+                      <span>Bugun malumot qoshilmadi</span>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <span>Bugun malumot qoshilmadi</span>
+              )}
+            </div>
           </div>
         </>
       )}

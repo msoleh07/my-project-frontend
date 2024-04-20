@@ -4,7 +4,21 @@ import Loader from "../../../components/loader/Loader";
 import "./WorkerHome.css";
 
 const WorkerHome = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const today = `${year}-${month}-${day}`;
+  const [todayData, setTodayData] = useState(today);
   const getAllWorker = useGetAllWorkerQuery();
+
+  const getData = (e) => {
+    e.preventDefault();
+    let data = new FormData(e.target);
+    let value = Object.fromEntries(data);
+    setTodayData(value?.data);
+    e.target.reset();
+  };
 
   const { username } = JSON.parse(sessionStorage.getItem("adminInfo"));
   const [data, setData] = useState({
@@ -22,24 +36,24 @@ const WorkerHome = () => {
       (f) => f.username === username
     );
 
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const today = `${year}-${month}-${day}`;
+    // const date = new Date();
+    // const year = date.getFullYear();
+    // const month = String(date.getMonth() + 1).padStart(2, "0");
+    // const day = String(date.getDate()).padStart(2, "0");
+    // const today = `${year}-${month}-${day}`;
 
     const addMeat = findUser?.addMeat.filter((addTime) => {
       const itemDate = new Date(addTime.addetTime)
         .toISOString()
         .substring(0, 10);
-      return itemDate === today;
+      return itemDate === todayData;
     });
 
     const addMincedMeat = findUser?.addMincedMeat.filter((addTime) => {
       const itemDate = new Date(addTime.addetTime)
         .toISOString()
         .substring(0, 10);
-      return itemDate === today;
+      return itemDate === todayData;
     });
 
     setData({
@@ -84,8 +98,14 @@ const WorkerHome = () => {
         <Loader />
       ) : (
         <>
-          <div className="bruchery_header_home">
-            <h1>Bugungi shashliklar</h1>
+          <div className="worker_header_home">
+            <h1>
+              {todayData === today ? "Bugungi shashliklar" : "Qidirgan sana"}
+            </h1>
+            <form onSubmit={getData}>
+              <input type="date" name="data" required />
+              <button>Qidirish</button>
+            </form>
           </div>
 
           <div className="worker_data_container">
@@ -208,6 +228,26 @@ const WorkerHome = () => {
                     </div>
                   </div>
                 </>
+              ) : (
+                <span>Bugun malumot qoshilmadi</span>
+              )}
+            </div>
+            <h2>Umumiy narx</h2>
+            <div className="worker_meat_full_data">
+              {mincedMeatSubtotal + meatSubtotal > 0 ? (
+                <div className="prices_container">
+                  <div className="text_price">Opshi summa:</div>
+                  <div className="ammount_price">
+                    {mincedMeatSubtotal + meatSubtotal > 0 ? (
+                      <h2>
+                        {formatNumber(mincedMeatSubtotal + meatSubtotal)}
+                        <span>so'm</span>
+                      </h2>
+                    ) : (
+                      <span>Bugun malumot qoshilmadi</span>
+                    )}
+                  </div>
+                </div>
               ) : (
                 <span>Bugun malumot qoshilmadi</span>
               )}

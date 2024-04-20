@@ -183,6 +183,7 @@
   grid-template-columns: repeat(1, auto);
 }
 
+.total_money_info_container,
 .total_time_data,
 .total_prices_data,
 .total_count_ammoun {
@@ -196,6 +197,7 @@
   border-bottom: 1px solid #000;
 }
 
+.total_money_info_container span,
 .total_time_data span,
 .total_prices_data span,
 .total_count_ammoun span {
@@ -207,6 +209,7 @@
   padding: 10px 0;
 }
 
+.total_money_info_container .price_list,
 .total_prices_data .price_list,
 .total_count_ammoun .price_list {
   display: flex;
@@ -224,6 +227,7 @@
   letter-spacing: 1.5px;
 }
 
+.total_money_info_container .price_list .price_text,
 .total_prices_data .price_list .price_text,
 .total_count_ammoun .price_list .ammount_text {
   font-size: 12px;

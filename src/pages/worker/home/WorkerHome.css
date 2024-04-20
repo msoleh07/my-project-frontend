@@ -5,19 +5,46 @@
   gap: 20px;
 }
 
-.worker_home_page .bruchery_header_home {
+.worker_home_page .worker_header_home {
   width: 100%;
-  height: 80px;
+  padding: 2%;
   display: flex;
+  flex-direction: column;
+  gap: 20px;
   align-items: center;
   justify-content: center;
   box-shadow: 3px 3px 5px #d6def7, -3px -3px 5px #e7ebf7;
   border-radius: 10px;
 }
 
-.worker_home_page .bruchery_header_home h1 {
-  font-size: 30px;
-  color: #333;
+.worker_home_page .worker_header_home h1 {
+  color: #333232;
+}
+
+.worker_home_page .worker_header_home form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.worker_home_page .worker_header_home form input {
+  width: 100%;
+  height: 40px;
+  font-size: 17px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #333232;
+}
+
+.worker_home_page .worker_header_home form button {
+  height: 40px;
+  padding: 0 30px;
+  cursor: pointer;
+  font-size: 17px;
+  background: none;
+  border: 1px solid #333232;
+  border-radius: 5px;
 }
 
 .worker_home_page .worker_data_container {

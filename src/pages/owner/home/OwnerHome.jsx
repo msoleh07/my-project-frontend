@@ -355,6 +355,27 @@ const OwnerHome = () => {
                         </div>
                       </div>
                     </li>
+                    <li className="work_information">
+                      <div className="total_money_info_container">
+                        <span>Umumiy summa:</span>
+                        <div className="price_list">
+                          {formatNumber(
+                            addMeatKgPriceTodey(item?.addMeatKg)?.reduce(
+                              (a, b) => a + b,
+                              0
+                            ) +
+                              addMincedMeatPriceTodey(
+                                item?.addMincedMeat
+                              )?.reduce((a, b) => a + b, 0) +
+                              addMeatPriceTodey(item?.addMeat)?.reduce(
+                                (a, b) => a + b,
+                                0
+                              )
+                          )}
+                          <div className="price_text">so'm</div>
+                        </div>
+                      </div>
+                    </li>
                   </div>
                 </ul>
               ))}
@@ -492,6 +513,23 @@ const OwnerHome = () => {
                             {todayData === today ? "Sana:" : "Qidirgan sana:"}
                           </span>
                           <div className="time_list">{todayData}</div>
+                        </div>
+                      </div>
+                    </li>
+                    <li className="work_information">
+                      <div className="total_money_info_container">
+                        <span>Umumiy summa:</span>
+                        <div className="price_list">
+                          {formatNumber(
+                            addMincedMeatPriceTodey(
+                              item?.addMincedMeat
+                            )?.reduce((a, b) => a + b, 0) +
+                              addMeatPriceTodey(item?.addMeat)?.reduce(
+                                (a, b) => a + b,
+                                0
+                              )
+                          )}
+                          <div className="price_text">so'm</div>
                         </div>
                       </div>
                     </li>
