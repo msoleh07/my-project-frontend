@@ -162,223 +162,235 @@ const OwnerHome = () => {
               <h2>Go'shxona malumotlari</h2>
             </div>
             <div className="formation_container">
-              {information?.map((item, index) => (
-                <ul key={index} className="information_table_list">
-                  <li className="information_name_header">{item?.firstname}</li>
-                  <div className="information_table_container">
-                    <li className="work_information">
-                      <div className="work_data_container">
-                        <span className="work_name">To'rg'amchi:</span>
-                        <div className="work_information_ammount">
-                          {addMeatDataTodey(item?.addMeat)?.map(
-                            (quantity, index) => (
-                              <span key={index}>
-                                {quantity === "Malumot yo`q" ? (
-                                  "Malumot yo`q"
-                                ) : (
-                                  <div className="info_container">
-                                    <div className="info_qtn">
-                                      {quantity?.quantity + " dona"}
-                                    </div>
-                                    <div className="info_add_name_and_time">
-                                      <div className="info_name_border">
-                                        {quantity?.addWorkerName}
+              {information?.length > 0 ? (
+                information?.map((item, index) => (
+                  <ul key={index} className="information_table_list">
+                    <li className="information_name_header">
+                      {item?.firstname}
+                    </li>
+                    <div className="information_table_container">
+                      <li className="work_information">
+                        <div className="work_data_container">
+                          <span className="work_name">To'rg'amchi:</span>
+                          <div className="work_information_ammount">
+                            {addMeatDataTodey(item?.addMeat)?.map(
+                              (quantity, index) => (
+                                <span key={index}>
+                                  {quantity === "Malumot yo`q" ? (
+                                    "Malumot yo`q"
+                                  ) : (
+                                    <div className="info_container">
+                                      <div className="info_qtn">
+                                        {quantity?.quantity + " dona"}
                                       </div>
-                                      <div className="info_time">
-                                        {getFormattedTime(quantity?.addetTime)}
+                                      <div className="info_add_name_and_time">
+                                        <div className="info_name_border">
+                                          {quantity?.addWorkerName}
+                                        </div>
+                                        <div className="info_time">
+                                          {getFormattedTime(
+                                            quantity?.addetTime
+                                          )}
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                )}
-                              </span>
-                            )
-                          )}
-                        </div>
-                      </div>
-                      <div className="work_total_data_container">
-                        <div className="total_count_ammoun">
-                          <span>Jami:</span>
-                          <div className="price_list">
-                            {addMeatDataTodey(item?.addMeat)?.find(
-                              (d) => d === "Malumot yo`q"
-                            )
-                              ? 0
-                              : addMeatDataTodey(item?.addMeat)?.reduce(
-                                  (a, b) => a + b?.quantity,
-                                  0
-                                )}
-                            <div className="ammount_text">dona</div>
-                          </div>
-                        </div>
-                        <div className="total_prices_data">
-                          <span>Pull:</span>
-                          <div className="price_list">
-                            {formatNumber(
-                              addMeatPriceTodey(item?.addMeat)?.reduce(
-                                (a, b) => a + b,
-                                0
+                                  )}
+                                </span>
                               )
                             )}
-                            <div className="price_text">so'm</div>
                           </div>
                         </div>
-                        <div className="total_time_data">
-                          <span>
-                            {todayData === today ? "Sana:" : "Qidirgan sana:"}
-                          </span>
-                          <div className="time_list">{todayData}</div>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="work_information">
-                      <div className="work_data_container">
-                        <span className="work_name">Qiyma:</span>
-                        <div className="work_information_ammount">
-                          {addMincedMeatDataTodey(item?.addMincedMeat)?.map(
-                            (quantity, index) => (
-                              <span key={index}>
-                                {quantity === "Malumot yo`q" ? (
-                                  "Malumot yo`q"
-                                ) : (
-                                  <div className="info_container">
-                                    <div className="info_qtn">
-                                      {quantity?.quantity + " dona"}
-                                    </div>
-                                    <div className="info_add_name_and_time">
-                                      <div className="info_name_border">
-                                        {quantity?.addWorkerName}
-                                      </div>
-                                      <div className="info_time">
-                                        {getFormattedTime(quantity?.addetTime)}
-                                      </div>
-                                    </div>
-                                  </div>
-                                )}
-                              </span>
-                            )
-                          )}
-                        </div>
-                      </div>
-                      <div className="work_total_data_container">
-                        <div className="total_count_ammoun">
-                          <span>Jami:</span>
-                          <div className="price_list">
-                            {addMincedMeatDataTodey(item?.addMincedMeat)?.find(
-                              (d) => d === "Malumot yo`q"
-                            )
-                              ? 0
-                              : addMincedMeatDataTodey(
-                                  item?.addMincedMeat
-                                )?.reduce((a, b) => a + b?.quantity, 0)}
-                            <div className="ammount_text">dona</div>
+                        <div className="work_total_data_container">
+                          <div className="total_count_ammoun">
+                            <span>Jami:</span>
+                            <div className="price_list">
+                              {addMeatDataTodey(item?.addMeat)?.find(
+                                (d) => d === "Malumot yo`q"
+                              )
+                                ? 0
+                                : addMeatDataTodey(item?.addMeat)?.reduce(
+                                    (a, b) => a + b?.quantity,
+                                    0
+                                  )}
+                              <div className="ammount_text">dona</div>
+                            </div>
+                          </div>
+                          <div className="total_prices_data">
+                            <span>Pull:</span>
+                            <div className="price_list">
+                              {formatNumber(
+                                addMeatPriceTodey(item?.addMeat)?.reduce(
+                                  (a, b) => a + b,
+                                  0
+                                )
+                              )}
+                              <div className="price_text">so'm</div>
+                            </div>
+                          </div>
+                          <div className="total_time_data">
+                            <span>
+                              {todayData === today ? "Sana:" : "Qidirgan sana:"}
+                            </span>
+                            <div className="time_list">{todayData}</div>
                           </div>
                         </div>
-                        <div className="total_prices_data">
-                          <span>Pull:</span>
-                          <div className="price_list">
-                            {formatNumber(
-                              addMincedMeatPriceTodey(
-                                item?.addMincedMeat
-                              )?.reduce((a, b) => a + b, 0)
+                      </li>
+                      <li className="work_information">
+                        <div className="work_data_container">
+                          <span className="work_name">Qiyma:</span>
+                          <div className="work_information_ammount">
+                            {addMincedMeatDataTodey(item?.addMincedMeat)?.map(
+                              (quantity, index) => (
+                                <span key={index}>
+                                  {quantity === "Malumot yo`q" ? (
+                                    "Malumot yo`q"
+                                  ) : (
+                                    <div className="info_container">
+                                      <div className="info_qtn">
+                                        {quantity?.quantity + " dona"}
+                                      </div>
+                                      <div className="info_add_name_and_time">
+                                        <div className="info_name_border">
+                                          {quantity?.addWorkerName}
+                                        </div>
+                                        <div className="info_time">
+                                          {getFormattedTime(
+                                            quantity?.addetTime
+                                          )}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  )}
+                                </span>
+                              )
                             )}
-                            <div className="price_text">so'm</div>
                           </div>
                         </div>
-                        <div className="total_time_data">
-                          <span>
-                            {todayData === today ? "Sana:" : "Qidirgan sana:"}
-                          </span>
-                          <div className="time_list">{todayData}</div>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="work_information">
-                      <div className="work_data_container">
-                        <span className="work_name">Son go'sht:</span>
-                        <div className="work_information_ammount">
-                          {addMeatKgDataTodey(item?.addMeatKg)?.map(
-                            (quantity, index) => (
-                              <span key={index}>
-                                {quantity === "Malumot yo`q" ? (
-                                  "Malumot yo`q"
-                                ) : (
-                                  <div className="info_container">
-                                    <div className="info_qtn">
-                                      {quantity?.quantity + " dona"}
-                                    </div>
-                                    <div className="info_add_name_and_time">
-                                      <div className="info_name_border">
-                                        Soat
-                                      </div>
-                                      <div className="info_time">
-                                        {getFormattedTime(quantity?.addetTime)}
-                                      </div>
-                                    </div>
-                                  </div>
-                                )}
-                              </span>
-                            )
-                          )}
-                        </div>
-                      </div>
-                      <div className="work_total_data_container">
-                        <div className="total_count_ammoun">
-                          <span>Jami:</span>
-                          <div className="price_list">
-                            {addMeatKgDataTodey(item?.addMeatKg)?.find(
-                              (d) => d === "Malumot yo`q"
-                            )
-                              ? 0
-                              : addMincedMeatDataTodey(
+                        <div className="work_total_data_container">
+                          <div className="total_count_ammoun">
+                            <span>Jami:</span>
+                            <div className="price_list">
+                              {addMincedMeatDataTodey(
+                                item?.addMincedMeat
+                              )?.find((d) => d === "Malumot yo`q")
+                                ? 0
+                                : addMincedMeatDataTodey(
+                                    item?.addMincedMeat
+                                  )?.reduce((a, b) => a + b?.quantity, 0)}
+                              <div className="ammount_text">dona</div>
+                            </div>
+                          </div>
+                          <div className="total_prices_data">
+                            <span>Pull:</span>
+                            <div className="price_list">
+                              {formatNumber(
+                                addMincedMeatPriceTodey(
                                   item?.addMincedMeat
-                                )?.reduce((a, b) => a + b?.quantity, 0)}
-                            <div className="ammount_text">kg</div>
+                                )?.reduce((a, b) => a + b, 0)
+                              )}
+                              <div className="price_text">so'm</div>
+                            </div>
+                          </div>
+                          <div className="total_time_data">
+                            <span>
+                              {todayData === today ? "Sana:" : "Qidirgan sana:"}
+                            </span>
+                            <div className="time_list">{todayData}</div>
                           </div>
                         </div>
-                        <div className="total_prices_data">
-                          <span>Pull:</span>
+                      </li>
+                      <li className="work_information">
+                        <div className="work_data_container">
+                          <span className="work_name">Son go'sht:</span>
+                          <div className="work_information_ammount">
+                            {addMeatKgDataTodey(item?.addMeatKg)?.map(
+                              (quantity, index) => (
+                                <span key={index}>
+                                  {quantity === "Malumot yo`q" ? (
+                                    "Malumot yo`q"
+                                  ) : (
+                                    <div className="info_container">
+                                      <div className="info_qtn">
+                                        {quantity?.quantity + " dona"}
+                                      </div>
+                                      <div className="info_add_name_and_time">
+                                        <div className="info_name_border">
+                                          Soat
+                                        </div>
+                                        <div className="info_time">
+                                          {getFormattedTime(
+                                            quantity?.addetTime
+                                          )}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  )}
+                                </span>
+                              )
+                            )}
+                          </div>
+                        </div>
+                        <div className="work_total_data_container">
+                          <div className="total_count_ammoun">
+                            <span>Jami:</span>
+                            <div className="price_list">
+                              {addMeatKgDataTodey(item?.addMeatKg)?.find(
+                                (d) => d === "Malumot yo`q"
+                              )
+                                ? 0
+                                : addMincedMeatDataTodey(
+                                    item?.addMincedMeat
+                                  )?.reduce((a, b) => a + b?.quantity, 0)}
+                              <div className="ammount_text">kg</div>
+                            </div>
+                          </div>
+                          <div className="total_prices_data">
+                            <span>Pull:</span>
+                            <div className="price_list">
+                              {formatNumber(
+                                addMeatKgPriceTodey(item?.addMeatKg)?.reduce(
+                                  (a, b) => a + b,
+                                  0
+                                )
+                              )}
+                              <div className="price_text">so'm</div>
+                            </div>
+                          </div>
+                          <div className="total_time_data">
+                            <span>
+                              {todayData === today ? "Sana:" : "Qidirgan sana:"}
+                            </span>
+                            <div className="time_list">{todayData}</div>
+                          </div>
+                        </div>
+                      </li>
+                      <li className="work_information">
+                        <div className="total_money_info_container">
+                          <span>Umumiy summa:</span>
                           <div className="price_list">
                             {formatNumber(
                               addMeatKgPriceTodey(item?.addMeatKg)?.reduce(
                                 (a, b) => a + b,
                                 0
-                              )
+                              ) +
+                                addMincedMeatPriceTodey(
+                                  item?.addMincedMeat
+                                )?.reduce((a, b) => a + b, 0) +
+                                addMeatPriceTodey(item?.addMeat)?.reduce(
+                                  (a, b) => a + b,
+                                  0
+                                )
                             )}
                             <div className="price_text">so'm</div>
                           </div>
                         </div>
-                        <div className="total_time_data">
-                          <span>
-                            {todayData === today ? "Sana:" : "Qidirgan sana:"}
-                          </span>
-                          <div className="time_list">{todayData}</div>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="work_information">
-                      <div className="total_money_info_container">
-                        <span>Umumiy summa:</span>
-                        <div className="price_list">
-                          {formatNumber(
-                            addMeatKgPriceTodey(item?.addMeatKg)?.reduce(
-                              (a, b) => a + b,
-                              0
-                            ) +
-                              addMincedMeatPriceTodey(
-                                item?.addMincedMeat
-                              )?.reduce((a, b) => a + b, 0) +
-                              addMeatPriceTodey(item?.addMeat)?.reduce(
-                                (a, b) => a + b,
-                                0
-                              )
-                          )}
-                          <div className="price_text">so'm</div>
-                        </div>
-                      </div>
-                    </li>
-                  </div>
-                </ul>
-              ))}
+                      </li>
+                    </div>
+                  </ul>
+                ))
+              ) : (
+                <span>Ishchilar qo'shilmagan</span>
+              )}
             </div>
           </div>
           <div className="owner_worcer_informatin_container">
@@ -386,156 +398,166 @@ const OwnerHome = () => {
               <h2>Shashlikxona malumotlari</h2>
             </div>
             <div className="formation_container">
-              {workerInformation?.map((item, index) => (
-                <ul key={index} className="information_table_list">
-                  <li className="information_name_header">{item?.firstname}</li>
-                  <div className="information_table_container">
-                    <li className="work_information">
-                      <div className="work_data_container">
-                        <span className="work_name">To'rg'amchi:</span>
-                        <div className="work_information_ammount">
-                          {addMeatDataTodey(item?.addMeat)?.map(
-                            (quantity, index) => (
-                              <span key={index}>
-                                {quantity === "Malumot yo`q" ? (
-                                  "Malumot yo`q"
-                                ) : (
-                                  <div className="info_container">
-                                    <div className="info_qtn">
-                                      {quantity?.quantity + " dona"}
-                                    </div>
-                                    <div className="info_add_name_and_time">
-                                      <div className="info_name_border">
-                                        {quantity?.addWorkerName}
+              {workerInformation?.length > 0 ? (
+                workerInformation?.map((item, index) => (
+                  <ul key={index} className="information_table_list">
+                    <li className="information_name_header">
+                      {item?.firstname}
+                    </li>
+                    <div className="information_table_container">
+                      <li className="work_information">
+                        <div className="work_data_container">
+                          <span className="work_name">To'rg'amchi:</span>
+                          <div className="work_information_ammount">
+                            {addMeatDataTodey(item?.addMeat)?.map(
+                              (quantity, index) => (
+                                <span key={index}>
+                                  {quantity === "Malumot yo`q" ? (
+                                    "Malumot yo`q"
+                                  ) : (
+                                    <div className="info_container">
+                                      <div className="info_qtn">
+                                        {quantity?.quantity + " dona"}
                                       </div>
-                                      <div className="info_time">
-                                        {getFormattedTime(quantity?.addetTime)}
+                                      <div className="info_add_name_and_time">
+                                        <div className="info_name_border">
+                                          {quantity?.addWorkerName}
+                                        </div>
+                                        <div className="info_time">
+                                          {getFormattedTime(
+                                            quantity?.addetTime
+                                          )}
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                )}
-                              </span>
-                            )
-                          )}
-                        </div>
-                      </div>
-                      <div className="work_total_data_container">
-                        <div className="total_count_ammoun">
-                          <span>Jami:</span>
-                          <div className="price_list">
-                            {addMeatDataTodey(item?.addMeat)?.find(
-                              (d) => d === "Malumot yo`q"
-                            )
-                              ? 0
-                              : addMeatDataTodey(item?.addMeat)?.reduce(
-                                  (a, b) => a + b?.quantity,
-                                  0
-                                )}
-                            <div className="ammount_text">dona</div>
-                          </div>
-                        </div>
-                        <div className="total_prices_data">
-                          <span>Pull:</span>
-                          <div className="price_list">
-                            {formatNumber(
-                              addMeatPriceTodey(item?.addMeat)?.reduce(
-                                (a, b) => a + b,
-                                0
+                                  )}
+                                </span>
                               )
                             )}
-                            <div className="price_text">so'm</div>
                           </div>
                         </div>
-                        <div className="total_time_data">
-                          <span>
-                            {todayData === today ? "Sana:" : "Qidirgan sana:"}
-                          </span>
-                          <div className="time_list">{todayData}</div>
+                        <div className="work_total_data_container">
+                          <div className="total_count_ammoun">
+                            <span>Jami:</span>
+                            <div className="price_list">
+                              {addMeatDataTodey(item?.addMeat)?.find(
+                                (d) => d === "Malumot yo`q"
+                              )
+                                ? 0
+                                : addMeatDataTodey(item?.addMeat)?.reduce(
+                                    (a, b) => a + b?.quantity,
+                                    0
+                                  )}
+                              <div className="ammount_text">dona</div>
+                            </div>
+                          </div>
+                          <div className="total_prices_data">
+                            <span>Pull:</span>
+                            <div className="price_list">
+                              {formatNumber(
+                                addMeatPriceTodey(item?.addMeat)?.reduce(
+                                  (a, b) => a + b,
+                                  0
+                                )
+                              )}
+                              <div className="price_text">so'm</div>
+                            </div>
+                          </div>
+                          <div className="total_time_data">
+                            <span>
+                              {todayData === today ? "Sana:" : "Qidirgan sana:"}
+                            </span>
+                            <div className="time_list">{todayData}</div>
+                          </div>
                         </div>
-                      </div>
-                    </li>
-                    <li className="work_information">
-                      <div className="work_data_container">
-                        <span className="work_name">Qiyma:</span>
-                        <div className="work_information_ammount">
-                          {addMincedMeatDataTodey(item?.addMincedMeat)?.map(
-                            (quantity, index) => (
-                              <span key={index}>
-                                {quantity === "Malumot yo`q" ? (
-                                  "Malumot yo`q"
-                                ) : (
-                                  <div className="info_container">
-                                    <div className="info_qtn">
-                                      {quantity?.quantity + " dona"}
-                                    </div>
-                                    <div className="info_add_name_and_time">
-                                      <div className="info_name_border">
-                                        {quantity?.addWorkerName}
+                      </li>
+                      <li className="work_information">
+                        <div className="work_data_container">
+                          <span className="work_name">Qiyma:</span>
+                          <div className="work_information_ammount">
+                            {addMincedMeatDataTodey(item?.addMincedMeat)?.map(
+                              (quantity, index) => (
+                                <span key={index}>
+                                  {quantity === "Malumot yo`q" ? (
+                                    "Malumot yo`q"
+                                  ) : (
+                                    <div className="info_container">
+                                      <div className="info_qtn">
+                                        {quantity?.quantity + " dona"}
                                       </div>
-                                      <div className="info_time">
-                                        {getFormattedTime(quantity?.addetTime)}
+                                      <div className="info_add_name_and_time">
+                                        <div className="info_name_border">
+                                          {quantity?.addWorkerName}
+                                        </div>
+                                        <div className="info_time">
+                                          {getFormattedTime(
+                                            quantity?.addetTime
+                                          )}
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                )}
-                              </span>
-                            )
-                          )}
+                                  )}
+                                </span>
+                              )
+                            )}
+                          </div>
                         </div>
-                      </div>
-                      <div className="work_total_data_container">
-                        <div className="total_count_ammoun">
-                          <span>Jami:</span>
-                          <div className="price_list">
-                            {addMincedMeatDataTodey(item?.addMincedMeat)?.find(
-                              (d) => d === "Malumot yo`q"
-                            )
-                              ? 0
-                              : addMincedMeatDataTodey(
+                        <div className="work_total_data_container">
+                          <div className="total_count_ammoun">
+                            <span>Jami:</span>
+                            <div className="price_list">
+                              {addMincedMeatDataTodey(
+                                item?.addMincedMeat
+                              )?.find((d) => d === "Malumot yo`q")
+                                ? 0
+                                : addMincedMeatDataTodey(
+                                    item?.addMincedMeat
+                                  )?.reduce((a, b) => a + b?.quantity, 0)}
+                              <div className="ammount_text">dona</div>
+                            </div>
+                          </div>
+                          <div className="total_prices_data">
+                            <span>Pull:</span>
+                            <div className="price_list">
+                              {formatNumber(
+                                addMincedMeatPriceTodey(
                                   item?.addMincedMeat
-                                )?.reduce((a, b) => a + b?.quantity, 0)}
-                            <div className="ammount_text">dona</div>
+                                )?.reduce((a, b) => a + b, 0)
+                              )}
+                              <div className="price_text">so'm</div>
+                            </div>
+                          </div>
+                          <div className="total_time_data">
+                            <span>
+                              {todayData === today ? "Sana:" : "Qidirgan sana:"}
+                            </span>
+                            <div className="time_list">{todayData}</div>
                           </div>
                         </div>
-                        <div className="total_prices_data">
-                          <span>Pull:</span>
+                      </li>
+                      <li className="work_information">
+                        <div className="total_money_info_container">
+                          <span>Umumiy summa:</span>
                           <div className="price_list">
                             {formatNumber(
                               addMincedMeatPriceTodey(
                                 item?.addMincedMeat
-                              )?.reduce((a, b) => a + b, 0)
+                              )?.reduce((a, b) => a + b, 0) +
+                                addMeatPriceTodey(item?.addMeat)?.reduce(
+                                  (a, b) => a + b,
+                                  0
+                                )
                             )}
                             <div className="price_text">so'm</div>
                           </div>
                         </div>
-                        <div className="total_time_data">
-                          <span>
-                            {todayData === today ? "Sana:" : "Qidirgan sana:"}
-                          </span>
-                          <div className="time_list">{todayData}</div>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="work_information">
-                      <div className="total_money_info_container">
-                        <span>Umumiy summa:</span>
-                        <div className="price_list">
-                          {formatNumber(
-                            addMincedMeatPriceTodey(
-                              item?.addMincedMeat
-                            )?.reduce((a, b) => a + b, 0) +
-                              addMeatPriceTodey(item?.addMeat)?.reduce(
-                                (a, b) => a + b,
-                                0
-                              )
-                          )}
-                          <div className="price_text">so'm</div>
-                        </div>
-                      </div>
-                    </li>
-                  </div>
-                </ul>
-              ))}
+                      </li>
+                    </div>
+                  </ul>
+                ))
+              ) : (
+                <span>Ishchilar qo'shilmagan</span>
+              )}
             </div>
           </div>
         </>

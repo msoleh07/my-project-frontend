@@ -12,72 +12,52 @@ const WorkerHome = () => {
   const [todayData, setTodayData] = useState(today);
   const getAllWorker = useGetAllWorkerQuery();
 
+  const [findUsername, setFindUsername] = useState([]);
+
   const getData = (e) => {
     e.preventDefault();
+
     let data = new FormData(e.target);
+
     let value = Object.fromEntries(data);
+
     setTodayData(value?.data);
+
     e.target.reset();
   };
 
   const { username } = JSON.parse(sessionStorage.getItem("adminInfo"));
-  const [data, setData] = useState({
-    addMeat: [null],
-    addMincedMeat: [null],
-  });
-
-  const [amoutTolatPrices, setAmoutTolatPrices] = useState({
-    addMeat: [null],
-    addMincedMeat: [null],
-  });
 
   useEffect(() => {
     let findUser = getAllWorker?.data?.innerData.find(
-      (f) => f.username === username
+      (f) => f?.username === username
     );
-
-    // const date = new Date();
-    // const year = date.getFullYear();
-    // const month = String(date.getMonth() + 1).padStart(2, "0");
-    // const day = String(date.getDate()).padStart(2, "0");
-    // const today = `${year}-${month}-${day}`;
-
-    const addMeat = findUser?.addMeat.filter((addTime) => {
-      const itemDate = new Date(addTime.addetTime)
-        .toISOString()
-        .substring(0, 10);
-      return itemDate === todayData;
-    });
-
-    const addMincedMeat = findUser?.addMincedMeat.filter((addTime) => {
-      const itemDate = new Date(addTime.addetTime)
-        .toISOString()
-        .substring(0, 10);
-      return itemDate === todayData;
-    });
-
-    setData({
-      addMeat: addMeat,
-      addMincedMeat: addMincedMeat,
-    });
-
-    setAmoutTolatPrices({
-      addMeat: addMeat?.map((m) => m?.money?.totalMoney),
-      addMincedMeat: addMincedMeat?.map((m) => m?.money?.totalMoney),
-    });
+    setFindUsername(findUser || []);
   }, [getAllWorker?.data]);
-  let meatSubtotal = amoutTolatPrices?.addMeat?.reduce((a, b) => a + b, 0);
-  let mincedMeatSubtotal = amoutTolatPrices?.addMincedMeat?.reduce(
-    (a, b) => a + b,
-    0
-  );
 
-  // console.log(
-  //   "meatSubtotal",
-  //   meatSubtotal,
-  //   "mincedMeatSubtotal",
-  //   mincedMeatSubtotal
-  // );
+  const addMeat =
+    findUsername?.addMeat?.filter((addTime) => {
+      const itemDate = new Date(addTime?.addetTime)
+        .toISOString()
+        .substring(0, 10);
+      return itemDate && itemDate === todayData;
+    }) || [];
+
+  const addMincedMeat =
+    findUsername?.addMincedMeat?.filter((addTime) => {
+      const itemDate = new Date(addTime?.addetTime)
+        .toISOString()
+        .substring(0, 10);
+      return itemDate && itemDate === todayData;
+    }) || [];
+
+  let meatSubtotal = addMeat
+    ?.map((m) => m?.money?.totalMoney ?? 0)
+    .reduce((a, b) => a + b, 0);
+
+  let mincedMeatSubtotal = addMincedMeat
+    ?.map((m) => m?.money?.totalMoney ?? 0)
+    .reduce((a, b) => a + b, 0);
 
   const formatNumber = (number) => {
     return new Intl.NumberFormat("uz-UZ").format(number);
@@ -113,8 +93,8 @@ const WorkerHome = () => {
             <ul className="worker_meat_data_ammount">
               <li className="text">Soni:</li>
               <li className="ammount">
-                {data?.addMeat?.length > 0 ? (
-                  data?.addMeat?.map((item, index) => (
+                {addMeat?.length > 0 ? (
+                  addMeat?.map((item, index) => (
                     <span key={index}>
                       {item?.meat?.quantity + " dona"}
                       <div className="add_name_and_time">
@@ -128,55 +108,67 @@ const WorkerHome = () => {
                     </span>
                   ))
                 ) : (
-                  <span>Bugun malumot qoshilmadi</span>
+                  <span>
+                    {todayData === today
+                      ? "Bugun malumot qoshilmadi"
+                      : "Qidirgan malumot topilmadi"}
+                  </span>
                 )}
               </li>
             </ul>
             <div className="worker_meat_full_data">
-              {amoutTolatPrices?.addMeat?.length > 0 ? (
-                <>
-                  <div className="prices_container">
-                    <div className="text_price"> Jami :</div>
-                    <div className="ammount_price">
-                      {amoutTolatPrices?.addMeat?.length > 0 ? (
-                        <h2>
-                          {data?.addMeat?.reduce(
-                            (a, b) => a + b?.meat?.quantity,
-                            0
-                          )}
-                          <span>dona</span>
-                        </h2>
-                      ) : (
-                        <span>Bugun malumot qoshilmadi</span>
-                      )}
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="ammount_container">
-                    <div className="text_price">Opshi summa:</div>
-                    <div className="ammount_price">
-                      {amoutTolatPrices?.addMeat?.length > 0 ? (
-                        <h2>
-                          {formatNumber(meatSubtotal)}
-                          <span>so'm</span>
-                        </h2>
-                      ) : (
-                        <span>Bugun malumot qoshilmadi</span>
-                      )}
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <span>Bugun malumot qoshilmadi</span>
-              )}
+              <div className="prices_container">
+                <div className="text_price"> Jami :</div>
+                <div className="ammount_price">
+                  {addMeat?.length > 0 ? (
+                    <h2>
+                      {addMeat?.reduce((a, b) => a + b?.meat?.quantity, 0)}
+                      <span>dona</span>
+                    </h2>
+                  ) : (
+                    <span>
+                      {todayData === today
+                        ? "Bugun malumot qoshilmadi"
+                        : "Qidirgan malumot topilmadi"}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <hr />
+              <div className="ammount_container">
+                <div className="text_price">Opshi summa:</div>
+                <div className="ammount_price">
+                  {addMeat?.length > 0 ? (
+                    <h2>
+                      {formatNumber(meatSubtotal)}
+                      <span>so'm</span>
+                    </h2>
+                  ) : (
+                    <span>
+                      {todayData === today
+                        ? "Bugun malumot qoshilmadi"
+                        : "Qidirgan malumot topilmadi"}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <hr />
+              <div className="ammount_container">
+                <div className="text_price">
+                  {todayData === today ? "Bugundi sana:" : "Qidirgan sana:"}
+                </div>
+                <div className="ammount_price">
+                  <h2>{todayData}</h2>
+                </div>
+              </div>
             </div>
 
             <h2>Qiyma</h2>
             <ul className="worker_meat_data_ammount">
               <li className="text">Soni:</li>
               <li className="ammount">
-                {data?.addMincedMeat?.length > 0 ? (
-                  data?.addMincedMeat?.map((item, index) => (
+                {addMincedMeat?.length > 0 ? (
+                  addMincedMeat?.map((item, index) => (
                     <span key={index}>
                       {item?.mincedMeat?.quantity + " dona"}
                       <div className="add_name_and_time">
@@ -190,52 +182,67 @@ const WorkerHome = () => {
                     </span>
                   ))
                 ) : (
-                  <span>Bugun malumot qoshilmadi</span>
+                  <span>
+                    {todayData === today
+                      ? "Bugun malumot qoshilmadi"
+                      : "Qidirgan malumot topilmadi"}
+                  </span>
                 )}
               </li>
             </ul>
             <div className="worker_meat_full_data">
-              {amoutTolatPrices?.addMincedMeat?.length > 0 ? (
-                <>
-                  <div className="prices_container">
-                    <div className="text_price"> Jami :</div>
-                    <div className="ammount_price">
-                      {amoutTolatPrices?.addMincedMeat?.length > 0 ? (
-                        <h2>
-                          {data?.addMincedMeat?.reduce(
-                            (a, b) => a + b?.mincedMeat?.quantity,
-                            0
-                          )}
-                          <span>dona</span>
-                        </h2>
-                      ) : (
-                        <span>Bugun malumot qoshilmadi</span>
+              <div className="prices_container">
+                <div className="text_price"> Jami :</div>
+                <div className="ammount_price">
+                  {addMincedMeat?.length > 0 ? (
+                    <h2>
+                      {addMincedMeat?.reduce(
+                        (a, b) => a + b?.mincedMeat?.quantity,
+                        0
                       )}
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="ammount_container">
-                    <div className="text_price">Opshi summa:</div>
-                    <div className="ammount_price">
-                      {amoutTolatPrices?.addMincedMeat?.length > 0 ? (
-                        <h2>
-                          {formatNumber(mincedMeatSubtotal)}
-                          <span>so'm</span>
-                        </h2>
-                      ) : (
-                        <span>Bugun malumot qoshilmadi</span>
-                      )}
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <span>Bugun malumot qoshilmadi</span>
-              )}
+                      <span>dona</span>
+                    </h2>
+                  ) : (
+                    <span>
+                      {todayData === today
+                        ? "Bugun malumot qoshilmadi"
+                        : "Qidirgan malumot topilmadi"}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <hr />
+              <div className="ammount_container">
+                <div className="text_price">Opshi summa:</div>
+                <div className="ammount_price">
+                  {addMincedMeat?.length > 0 ? (
+                    <h2>
+                      {formatNumber(mincedMeatSubtotal)}
+                      <span>so'm</span>
+                    </h2>
+                  ) : (
+                    <span>
+                      {todayData === today
+                        ? "Bugun malumot qoshilmadi"
+                        : "Qidirgan malumot topilmadi"}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <hr />
+              <div className="ammount_container">
+                <div className="text_price">
+                  {todayData === today ? "Bugundi sana:" : "Qidirgan sana:"}
+                </div>
+                <div className="ammount_price">
+                  <h2>{todayData}</h2>
+                </div>
+              </div>
             </div>
             <h2>Umumiy narx</h2>
             <div className="worker_meat_full_data">
-              {mincedMeatSubtotal + meatSubtotal > 0 ? (
-                <div className="prices_container">
+              <div className="prices_container_data">
+                <div className="total_container">
                   <div className="text_price">Opshi summa:</div>
                   <div className="ammount_price">
                     {mincedMeatSubtotal + meatSubtotal > 0 ? (
@@ -244,13 +251,22 @@ const WorkerHome = () => {
                         <span>so'm</span>
                       </h2>
                     ) : (
-                      <span>Bugun malumot qoshilmadi</span>
+                      <span>
+                        {todayData === today
+                          ? "Bugun malumot qoshilmadi"
+                          : "Qidirgan malumot topilmadi"}
+                      </span>
                     )}
                   </div>
                 </div>
-              ) : (
-                <span>Bugun malumot qoshilmadi</span>
-              )}
+                <hr />
+                <div className="data_container">
+                  <div className="text_price">
+                    {todayData === today ? "Bugundi sana:" : "Qidirgan sana:"}
+                  </div>
+                  <div className="ammount_price">{todayData}</div>
+                </div>
+              </div>
             </div>
           </div>
         </>

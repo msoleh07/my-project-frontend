@@ -80,6 +80,11 @@
   gap: 20px;
 }
 
+.formation_container span {
+  text-align: center;
+  margin: 10px;
+}
+
 .information_table_list {
   width: 100%;
   list-style: none;

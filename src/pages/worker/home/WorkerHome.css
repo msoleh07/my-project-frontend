@@ -130,7 +130,6 @@
   padding: 2%;
   display: grid;
   grid-template-columns: repeat(1, auto);
-  /* gap: 5px; */
 }
 
 .worker_home_page .prices_container,
@@ -139,12 +138,35 @@
   grid-template-columns: repeat(2, auto);
 }
 
+.prices_container_data {
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+}
+
+.data_container,
+.total_container {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+}
+
+.data_container .text_price,
 .worker_home_page .text_price {
   border-right: 1px solid #000;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 150px;
+}
+
+/* .data_container .text_price {
+  padding: 20px 0;
+} */
+
+.data_container .ammount_price {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .worker_home_page .ammount_price {
@@ -175,8 +197,13 @@
 
 .ammount_price span {
   padding: 3px 10px;
+  margin: 10px 0;
   border-radius: 50px;
   background: #00000022;
+}
+
+.ammount_price {
+  margin: 10px 0;
 }
 
 .worker_meat_full_data span {
