@@ -14,12 +14,12 @@ import TradeMoney from "./components/tradeMoney/TradeMoney";
 import WorkerSalary from "./components/workerSalary/WorkerSalary";
 import GivenMeat from "./components/givenMeat/GivenMeat";
 import Workers from "./components/workers/Workers";
-import Loader from "./components/loader/Loader";
 import OwnLoader from "./components/ownLoader/OwnLoader";
-import SkeletonPage from "./components/skeleton/Skeleton";
 import Home from "./pages/butchery/home/Home";
 import WorkerHome from "./pages/worker/home/WorkerHome";
 import OwnerHome from "./pages/owner/home/OwnerHome";
+import WorkerAbout from "./pages/worker/workerAbout/WorkerAbout";
+import WorkerLoyaut from "./pages/worker/workerLoyaut/WorkerLoyaut";
 
 const Router = () => {
   let location = useLocation();
@@ -55,12 +55,14 @@ const Router = () => {
               <Route path="/own/database/givenMeat" element={<GivenMeat />} />
               <Route path="/own/database/workers" element={<Workers />} />
               <Route path="/own/database/loader" element={<OwnLoader />} />
-              {/* <Route
-            path="/own/database/loaderparttwo"
-            element={<SkeletonPage />}
-          /> */}
             </Route>
-            <Route path="/worker/about" element={<h1>worker about</h1>} />
+            <Route element={<WorkerLoyaut />}>
+              <Route path="/worker/about" element={<WorkerAbout />} />
+              <Route
+                path="/worker/about/two"
+                element={<h2>/worker/about/two</h2>}
+              />
+            </Route>
             <Route path="/butchery/database" element={<Database />} />
             <Route path="/butchery/addData" element={<AddData />} />
 

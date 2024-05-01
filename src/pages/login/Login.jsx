@@ -40,7 +40,12 @@ const Login = () => {
       if (res?.data?.status === "successfuly") {
         sessionStorage.setItem(
           "adminInfo",
-          JSON.stringify(res?.data?.innerdata)
+          JSON.stringify({
+            username: res?.data?.innerdata?.username,
+            firstname: res?.data?.innerdata?.firstname,
+            lastname: res?.data?.innerdata?.lastname,
+            role: res?.data?.innerdata?.role,
+          })
         );
         setLoader(false);
         e.target.reset();

@@ -8,17 +8,19 @@
 .worker_home_page .worker_header_home {
   width: 100%;
   padding: 2%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(1, 100%);
   gap: 20px;
   align-items: center;
   justify-content: center;
-  box-shadow: 3px 3px 5px #d6def7, -3px -3px 5px #e7ebf7;
+  /* box-shadow: 3px 3px 5px #d6def7, -3px -3px 5px #e7ebf7; */
+  border: 1px solid #000;
   border-radius: 10px;
 }
 
 .worker_home_page .worker_header_home h1 {
   color: #333232;
+  text-align: center;
 }
 
 .worker_home_page .worker_header_home form {
@@ -48,7 +50,8 @@
 }
 
 .worker_home_page .worker_data_container {
-  box-shadow: 3px 3px 5px #d6def7, -3px -3px 5px #e7ebf7;
+  /* box-shadow: 3px 3px 5px #d6def7, -3px -3px 5px #e7ebf7;*/
+  border: 1px solid #000;
   border-radius: 10px;
   padding: 2%;
   display: grid;

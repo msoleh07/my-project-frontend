@@ -82,6 +82,7 @@ const WorkerHome = () => {
             <h1>
               {todayData === today ? "Bugungi shashliklar" : "Qidirgan sana"}
             </h1>
+            <hr />
             <form onSubmit={getData}>
               <input type="date" name="data" required />
               <button>Qidirish</button>
