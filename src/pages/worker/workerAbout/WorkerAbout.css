@@ -4,6 +4,7 @@
   gap: 20px;
 }
 
+.worker_info_data_container,
 .worker_full_data_ul_container,
 .worker_data_ul_container,
 .worker_info_container,
@@ -147,6 +148,54 @@
   cursor: pointer;
   font-size: 17px;
   background: #bffcdd;
+}
+
+.worker_info_add_btn {
+  display: grid;
+  grid-template-columns: repeat(1, 100%);
+  gap: 15px;
+}
+
+.worker_info_add_btn button {
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  background: #c8f2fc;
+}
+
+.worker_info_add_btn button:active {
+  background: #bffcdd;
+}
+
+.worker_info_add_btn form {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  height: 45px;
+  overflow: hidden;
+}
+
+.worker_info_add_btn form input {
+  border: none;
+  text-indent: 10px;
+  font-size: 17px;
+}
+
+.worker_info_add_btn form input:last-child {
+  border-left: 1px solid #ccc;
+}
+
+.worker_info_add_btn
+  form
+  input:last-child[type="number"]::-webkit-inner-spin-button,
+.worker_info_add_btn
+  form
+  input:last-child[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
 }
 
 @media (max-width: 400px) {
